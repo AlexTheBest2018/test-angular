@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { GridOptions } from 'ag-grid-community';
 import { GetYouTubeDataService } from '../../services/get-you-tube-data.service';
-import { ImageFormatterComponent } from '../../../shared/formatter-components/image-formatter.component';
-import { LinkFormatterComponent } from '../../../shared/formatter-components/link-formatter.component';
+import { ImageFormatterComponent } from '../../../shared/formatter-components/image-formatter/image-formatter.component';
+import { LinkFormatterComponent } from '../../../shared/formatter-components/link-formatter/link-formatter.component';
 
 import { ToolbarComponent } from '../../../shared/toolbar/toolbar.component';
-import { HeaderCheckboxFormatterComponent } from '../../../shared/formatter-components/header-checkbox-formatter.component';
+import { HeaderCheckboxFormatterComponent } from '../../../shared/formatter-components/header-checkbox-formatter/header-checkbox-formatter.component';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 

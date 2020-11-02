@@ -1,18 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import {HeaderCheckboxFormatterInterface} from "../../interfaces/header-checkbox-formatter.interface";
 import { IHeaderAngularComp } from 'ag-grid-angular';
 import { BehaviorSubject } from 'rxjs';
-import {HeaderCheckboxFormatterInterface} from "../interfaces/header-checkbox-formatter.interface";
-
 
 @Component({
-  selector: 'checkbox-renderer',
-  template: `
-    <input 
-      type='checkbox' 
-      (click)='checkedHandler($event)'
-      [checked]='checked'
-    />
-`,
+  selector: 'app-header-checkbox-formatter',
+  templateUrl: './header-checkbox-formatter.component.html',
+  styleUrls: ['./header-checkbox-formatter.component.scss']
 })
 export class HeaderCheckboxFormatterComponent implements IHeaderAngularComp {
   public params: any;
