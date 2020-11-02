@@ -1,0 +1,16 @@
+<div>
+    <span>
+      <h2><i class="fa fa-calculator"></i>Toolbar</h2>
+      <dl style="font-size: large; padding: 10px 10px 10px 10px">
+        <dt class="totalStyle">
+          <input type="checkbox" checked (click)="toggleSelectionMode($event)">toggle Selection mode
+        </dt>
+        <dt class="totalStyle">
+          Total: <b>{{ numTotal }}</b>
+        </dt>
+        <dt class="totalStyle">
+          Selected: <b>{{ numSelected | async }}</b>
+        </dt>
+      </dl>
+    </span>
+</div>
