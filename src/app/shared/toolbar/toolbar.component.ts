@@ -29,13 +29,13 @@ export class ToolbarComponent implements IToolPanel {
     this.numTotal = this.params.api.getDisplayedRowCount();
   }
 
-  toggleSelectionMode(event) {
+  public toggleSelectionMode = event => {
     this.params.columnApi.setColumnVisible('checkbox', event.target.checked);
-    if(!event.target.checked) this.params.api.deselectAll();
+    if (!event.target.checked) { this.params.api.deselectAll(); }
     this.params.api.redrawRows();
   }
 
   refresh = (): void => {
-  };
+  }
 
 }

@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ICellRendererParams } from 'ag-grid-community';
 import { ImageFormaterInterface } from '../../interfaces/image-formater.interface';
 
 @Component({
