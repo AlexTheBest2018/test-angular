@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IToolPanel, IToolPanelParams } from 'ag-grid-community';
 import { BehaviorSubject } from 'rxjs';
+import {HeaderCheckboxFormatterInterface} from '../interfaces/header-checkbox-formatter.interface';
 
 
 @Component({
@@ -8,13 +9,14 @@ import { BehaviorSubject } from 'rxjs';
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
+
 export class ToolbarComponent implements IToolPanel {
 
   public params: IToolPanelParams;
   public numTotal: number;
   public numSelected: BehaviorSubject<number>;
 
-  public agInit(params: any): void {
+  public agInit(params: HeaderCheckboxFormatterInterface): void {
     this.params = params;
 
     this.numSelected = params.selectedCount;
@@ -32,7 +34,6 @@ export class ToolbarComponent implements IToolPanel {
   public toggleSelectionMode = event => {
     this.params.columnApi.setColumnVisible('checkbox', event.target.checked);
     if (!event.target.checked) { this.params.api.deselectAll(); }
-    this.params.api.redrawRows();
   }
 
   refresh = (): void => {

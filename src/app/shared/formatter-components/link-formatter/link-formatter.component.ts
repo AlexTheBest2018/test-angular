@@ -9,7 +9,7 @@ import { LinkFormatterInterface } from '../../interfaces/link-formatter.interfac
 
 export class LinkFormatterComponent {
   public params: LinkFormatterInterface;
-  agInit(params: LinkFormatterInterface){
+  agInit(params: LinkFormatterInterface): void {
     this.params = params;
   }
 }

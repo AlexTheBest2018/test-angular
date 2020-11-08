@@ -1,9 +1,9 @@
 import {ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 
 import { GridDataComponent } from './grid-data.component';
-import {GetYouTubeDataService} from "../../services/get-you-tube-data.service";
-import {HttpClientTestingModule} from "@angular/common/http/testing";
-// import {ChangeDetectionStrategy} from "@angular/core";
+import {GetYouTubeDataService} from '../../services/get-you-tube-data.service';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+// import {ChangeDetectionStrategy} from '@angular/core';
 
 describe('GridDataComponent', () => {
   let component: GridDataComponent;

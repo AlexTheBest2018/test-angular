@@ -5,6 +5,7 @@ import { ImageFormatterComponent } from './formatter-components/image-formatter/
 import { LinkFormatterComponent } from './formatter-components/link-formatter/link-formatter.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { HeaderCheckboxFormatterComponent } from './formatter-components/header-checkbox-formatter/header-checkbox-formatter.component';
+import { DateFormatterComponent } from './formatter-components/date-formatter/date-formatter.component';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { HeaderCheckboxFormatterComponent } from './formatter-components/header-
     ImageFormatterComponent,
     LinkFormatterComponent,
     ToolbarComponent,
-    HeaderCheckboxFormatterComponent
+    HeaderCheckboxFormatterComponent,
+    DateFormatterComponent
   ],
   imports: [
     CommonModule,

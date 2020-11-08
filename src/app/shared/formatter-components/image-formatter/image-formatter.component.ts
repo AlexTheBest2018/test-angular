@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ImageFormaterInterface } from '../../interfaces/image-formater.interface';
+import { CellParamsInterface } from '../../interfaces/cell-params.interface';
 
 @Component({
   selector: 'app-image-formatter',
@@ -8,8 +8,8 @@ import { ImageFormaterInterface } from '../../interfaces/image-formater.interfac
 })
 
 export class ImageFormatterComponent {
-  public params: ImageFormaterInterface;
-  agInit(params: ImageFormaterInterface){
+  public params: CellParamsInterface;
+  agInit(params: CellParamsInterface): void{
     this.params = params;
   }
 }

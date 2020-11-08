@@ -1,5 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { GridOptions } from 'ag-grid-community';
+import {
+  GetContextMenuItemsParams,
+  GridOptions,
+  MenuItemDef,
+  SuppressKeyboardEventParams
+} from 'ag-grid-community';
 import { GetYouTubeDataService } from '../../services/get-you-tube-data.service';
 import { ImageFormatterComponent } from '../../../shared/formatter-components/image-formatter/image-formatter.component';
 import { LinkFormatterComponent } from '../../../shared/formatter-components/link-formatter/link-formatter.component';
@@ -10,6 +15,8 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import 'ag-grid-enterprise';
+import { Item, RawData, RowData } from '../../../shared/interfaces/data.interface';
+import { DateFormatterComponent } from '../../../shared/formatter-components/date-formatter/date-formatter.component';
 
 @Component({
   selector: 'app-grid-data',
@@ -47,6 +54,7 @@ export class GridDataComponent implements OnInit, OnDestroy {
         headerName: 'Published on',
         field: 'publishedAt',
         width: 200,
+        cellRendererFramework: DateFormatterComponent,
         suppressSizeToFit: true,
         menuTabs: []
       },
@@ -83,12 +91,12 @@ export class GridDataComponent implements OnInit, OnDestroy {
       defaultToolPanel: 'customStats',
     },
     frameworkComponents: {
-      ToolbarComponent: ToolbarComponent
+      ToolbarComponent
     },
     rowSelection: 'multiple',
     suppressRowClickSelection: true,
     onSelectionChanged: this.onSelectionChanged.bind(this),
-    getContextMenuItems: this.getContextMenuItems,
+    getContextMenuItems: this.getContextMenuItems.bind(this),
   };
 
   constructor(private GetYouTubeDataService: GetYouTubeDataService) { }
@@ -96,7 +104,7 @@ export class GridDataComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.add(this.GetYouTubeDataService.getYouTubeList()
       .pipe(
-        map((e: any) => e.items.map(v => ({
+        map((e: RawData) => e.items.map((v: Item) => ({
           thumbnails: v.snippet.thumbnails.default.url,
           publishedAt: v.snippet.publishedAt,
           title: v.snippet.channelTitle,
@@ -104,26 +112,24 @@ export class GridDataComponent implements OnInit, OnDestroy {
           url: `https://www.youtube.com/watch?v=${v.id.videoId}`,
         }))),
       )
-      .subscribe((data: any) => {
+      .subscribe((data: RowData[]) => {
         this.gridOptions.api.setRowData(data);
         this.gridOptions.api.sizeColumnsToFit();
       }));
   }
 
-  onSelectionChanged(event) {
+  onSelectionChanged(event: SuppressKeyboardEventParams): void {
     this.selectedCount.next(event.api.getSelectedRows().length);
   }
 
-  getContextMenuItems(params) {
-    if(params.column.getId() === 'title') {
-      return [...params.defaultItems, {
-        name: 'Open in new tab',
-        action: () => {
-          window.open(params.node.data.url, '_blank')
-        }
-      }]
-    }
-    return params.defaultItems;
+  getContextMenuItems(params: GetContextMenuItemsParams): MenuItemDef {
+    // @ts-ignore
+    return !(params.column.getId() !== 'title') ? [...params.defaultItems, {
+      name: 'Open in new tab',
+      action: () => {
+        window.open(params.node.data.url, '_blank');
+      }
+    }] : params.defaultItems;
   }
 
   ngOnDestroy(): void {
